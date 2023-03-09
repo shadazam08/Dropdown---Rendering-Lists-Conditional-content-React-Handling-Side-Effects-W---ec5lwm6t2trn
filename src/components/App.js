@@ -154,68 +154,55 @@ function App()
 	}
 
 	const getDivs = (place, obj) => {
-	return (
-	<div className="divStyles">
-	<div id={`${place}-name`}>
-	<strong>{obj.name}</strong>
-	</div>
-	<div id={`${place}-title`}>
-	<strong>{obj.name}</strong>
-	</div>
-	<div id={`${place}-description`}>
-	{obj.description}
-	</div>
-	</div>
-	)
+		return (
+			<div className="divStyles">
+				<div id={`${place}-name`}>
+					<strong>{obj.name}</strong>
+				</div>
+				<div id={`${place}-title`}>
+					<strong>{obj.name}</strong>
+				</div>
+				<div id={`${place}-description`}>
+					{obj.description}
+				</div>
+			</div>
+		)
 	}
 
 	const handleStateChange = (event) => {
-	setState(event.target.value);
+		setState(event.target.value);
 	}
 
 	const handleCityChange = (event) => {
-	setCity(event.target.value);
+		setCity(event.target.value);
 	}
 
 	const handleLandmarkChange = (event) => {
-	setLandmark(event.target.value);
+		setLandmark(event.target.value);
 	}
 
 	return (
-	<div id="main">
-	<div id="selectContainer">
-	<select id="state" value={state} onChange={handleStateChange} className = "selectStyles">
-	{getOptionArray(states)}
-	</select>
-
-	<select id="city" value={city} onChange={handleCityChange} className = "selectStyles">
-	{getOptionArray(states[state].city)}
-	</select>
-
-	<select id="landmark" value={landmark} onChange={handleLandmarkChange} className = "selectStyles">
-	{getOptionArray(states[state].city[city].landmarks)}
-	</select>
-	</div>
-
-
-	<div id="divContainer">
+		<div id="main">
+			<div id="selectContainer">
+				<select id="state" value={state} onChange={handleStateChange} className = "selectStyles">
+					{getOptionArray(states)}
+				</select>
+				<select id="city" value={city} onChange={handleCityChange} className = "selectStyles">
+					{getOptionArray(states[state].city)}
+				</select>
+				<select id="landmark" value={landmark} onChange={handleLandmarkChange} className = "selectStyles">
+					{getOptionArray(states[state].city[city].landmarks)}
+				</select>
+			</div>
+			<div id="divContainer">
+				{getDivs("state", states[state])}
+				{getDivs("city", states[state].city[city])}
+				{getDivs("landmark", states[state].city[city].landmarks[landmark])}
 	
-	{getDivs("state", states[state])}
-	
-
-	
-	{getDivs("city", states[state].city[city])}
+			</div>
 	
 
-	
-	{getDivs("landmark", states[state].city[city].landmarks[landmark])}
-	
-	</div>
-	
-
-	</div>
+		</div>
 	);
 }
-
-
 export default App;
