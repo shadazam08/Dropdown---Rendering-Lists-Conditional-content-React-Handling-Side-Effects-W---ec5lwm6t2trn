@@ -1,7 +1,6 @@
 import React, { useState,useReducer } from "react";
 import "./../styles/App.css";
 
-
 const states = [{
 	name : "Madhya Pradesh",
 	description:"Madhya Pradesh, a large state in central India, retains landmarks from eras throughout Indian history.",
@@ -144,65 +143,59 @@ function App()
 	const [state, setState] = useState(0); // 0th index element (it can be 0,1,2,3)
 	const [city, setCity] = useState(0);
 	const [landmark, setLandmark] = useState(0);
-
 	const getOptionArray = (arr) => {
 	let options = arr.map((place, index) => {
 	return <option key={index} value={index}>{arr[index].name}</option>
 	})
-
 	return options;
-	}
+}
 
-	const getDivs = (place, obj) => {
-		return (
-			<div className="divStyles">
-				<div id={`${place}-name`}>
-					<strong>{obj.name}</strong>
-				</div>
-				<div id={`${place}-title`}>
-					<strong>{obj.name}</strong>
-				</div>
-				<div id={`${place}-description`}>
-					{obj.description}
-				</div>
-			</div>
-		)
-	}
-
-	const handleStateChange = (event) => {
-		setState(event.target.value);
-	}
-
-	const handleCityChange = (event) => {
-		setCity(event.target.value);
-	}
-
-	const handleLandmarkChange = (event) => {
-		setLandmark(event.target.value);
-	}
-
+const getDivs = (place, obj) => {
 	return (
-		<div id="main">
-			<div id="selectContainer">
-				<select id="state" value={state} onChange={handleStateChange} className = "selectStyles">
-					{getOptionArray(states)}
-				</select>
-				<select id="city" value={city} onChange={handleCityChange} className = "selectStyles">
-					{getOptionArray(states[state].city)}
-				</select>
-				<select id="landmark" value={landmark} onChange={handleLandmarkChange} className = "selectStyles">
-					{getOptionArray(states[state].city[city].landmarks)}
-				</select>
+		<div className="divStyles">
+			<div id={`${place}-name`}>
+				<strong>{obj.name}</strong>
 			</div>
-			<div id="divContainer">
-				{getDivs("state", states[state])}
-				{getDivs("city", states[state].city[city])}
-				{getDivs("landmark", states[state].city[city].landmarks[landmark])}
-	
+			<div id={`${place}-title`}>
+				<strong>{obj.name}</strong>
 			</div>
-	
+			<div id={`${place}-description`}>
+				{obj.description}
+			</div>
+		</div>
+	)
+}
+const handleStateChange = (event) => {
+	setState(event.target.value);
+}
+const handleCityChange = (event) => {
+	setCity(event.target.value);
+}
+const handleLandmarkChange = (event) => {
+	setLandmark(event.target.value);
+}
+return (
+	<div id="main">
+		<div id="selectContainer">
+			<select id="state" value={state} onChange={handleStateChange} className = "selectStyles">
+				{getOptionArray(states)}
+			</select>
+			<select id="city" value={city} onChange={handleCityChange} className = "selectStyles">
+				{getOptionArray(states[state].city)}
+			</select>
+			<select id="landmark" value={landmark} onChange={handleLandmarkChange} className = "selectStyles">
+				{getOptionArray(states[state].city[city].landmarks)}
+			</select>
+		</div>
+		<div id="divContainer">
+			{getDivs("state", states[state])}
+			{getDivs("city", states[state].city[city])}
+			{getDivs("landmark", states[state].city[city].landmarks[landmark])}
 
 		</div>
-	);
+
+
+	</div>
+);
 }
 export default App;
